@@ -1,4 +1,3 @@
-from barbicanclient import orders
 from barbicanclient import exceptions
 from barbicanclient import client
 from keystoneclient.auth import identity
