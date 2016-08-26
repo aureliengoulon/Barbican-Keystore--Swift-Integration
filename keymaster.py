@@ -31,7 +31,6 @@ import os
 from swift.common.middleware.crypto_utils import CRYPTO_KEY_CALLBACK
 from swift.common.swob import Request, HTTPException
 from swift.common.wsgi import WSGIContext
-from barbicanclient import orders
 from barbicanclient import client
 from keystoneclient.auth import identity
 from keystoneclient import session
