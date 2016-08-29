@@ -27,6 +27,7 @@ import base64
 import hashlib
 import hmac
 import os
+import re
 
 from swift.common.middleware.crypto_utils import CRYPTO_KEY_CALLBACK
 from swift.common.swob import Request, HTTPException
@@ -35,7 +36,6 @@ from barbicanclient import client
 from keystoneclient.auth import identity
 from keystoneclient import session
 from configobj import ConfigObj
-import re
 
 ROOT_SECRET_CIPHER = u'AES'
 ROOT_SECRET_LENGTH = 256
