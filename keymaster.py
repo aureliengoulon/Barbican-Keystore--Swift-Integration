@@ -56,7 +56,7 @@ def create_root_secret():
     try:
         secret_id = secret_ref[-36:]
         uuid_pattern = re.compile(r'^[\da-f]{8}-([\da-f]{4}-){3}[\da-f]{12}$', re.IGNORECASE)
-        if not uuid_pattern.match(secret_id):
+        if not uuid_pattern.match(secret_id) and barbican.secret.get(name=ROOT_SECRET_NAME) is []:
             order = barbican.orders.create_key(name=ROOT_SECRET_NAME,
                                                algorithm=ROOT_SECRET_CIPHER,
                                                bit_length=ROOT_SECRET_LENGTH,
@@ -67,10 +67,15 @@ def create_root_secret():
             secret_ref = barbican.orders.get(order_ref).secret_ref
             config['filter:keymaster']['encryption_root_secret_id'] = secret_ref
             config.write()
-        root_secret_b64 = base64.b64encode(barbican.secrets.get(secret_ref).payload)
-        b64_pattern = re.compile(r'^[A-Za-z0-9+/]+[=]{0,2}$')
-        if b64_pattern.match(root_secret_b64.strip()):
-            return root_secret_b64
+        root_secret_ref = barbican.secrets.list(name=ROOT_SECRET_NAME,
+                                algorithm=ROOT_SECRET_CIPHER,
+                                mode=ROOT_SECRET_MODE,
+                                bits=ROOT_SECRET_LENGTH)[0].secret_ref
+        if root_secret_ref == secret_ref:
+            root_secret_b64 = base64.b64encode(barbican.secrets.get(secret_ref).payload)
+            b64_pattern = re.compile(r'^[A-Za-z0-9+/]+[=]{0,2}$')
+            if b64_pattern.match(root_secret_b64.strip()):
+                return root_secret_b64
     except (NameError,ValueError):
         raise
 
