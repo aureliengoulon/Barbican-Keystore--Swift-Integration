@@ -8,7 +8,6 @@ from keystoneclient import session
 from math import ceil
 from configobj import ConfigObj
 
-
 ROOT_SECRET_CIPHER = u'AES'
 ROOT_SECRET_LENGTH = 256
 ROOT_SECRET_MODE = u'CBC'
