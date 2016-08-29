@@ -35,7 +35,6 @@ from barbicanclient import client
 from keystoneclient.auth import identity
 from keystoneclient import session
 from configobj import ConfigObj
-import base64
 import re
 
 ROOT_SECRET_CIPHER = u'AES'
