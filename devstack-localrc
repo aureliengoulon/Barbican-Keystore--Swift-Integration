@@ -1,0 +1,46 @@
+# Misc
+DATABASE_PASSWORD=password
+ADMIN_PASSWORD=password
+SERVICE_PASSWORD=password
+SERVICE_TOKEN=password
+RABBIT_PASSWORD=password
+
+# IP Address for services to bind to
+HOST_IP=172.16.21.3
+
+# Enable Logging
+#LOGFILE=/opt/stack/logs/stack.sh.log
+VERBOSE=True
+LOG_COLOR=True
+SCREEN_LOGDIR=/opt/stack/logs
+
+# Pre-requisite
+ENABLED_SERVICES=rabbit,mysql,key
+#KEYSTONE_BRANCH=stable/mitaka
+
+# Horizon (always use the trunk)
+ENABLED_SERVICES+=,horizon
+HORIZON_REPO=https://github.com/openstack/horizon
+#HORIZON_BRANCH=stable/mitaka
+
+# Nova
+ENABLED_SERVICES+=,n-api,n-crt,n-obj,n-cpu,n-cond,n-sch
+IMAGE_URLS+=",https://launchpad.net/cirros/trunk/0.3.0/+download/cirros-0.3.0-x86_64-disk.img"
+
+# Neutron
+ENABLED_SERVICES+=,q-svc,q-agt,q-dhcp,q-l3,q-meta,neutron
+
+# Swift
+ENABLED_SERVICES+=,s-proxy,s-object,s-container,s-account
+SWIFT_REPLICAS=1
+SWIFT_HASH=014385b4c13f572e209e
+SWIFT_BRANCH=feature/crypto
+
+# Barbican
+enable_plugin barbican https://git.openstack.org/openstack/barbican
+ENABLED_SERVICES+=,barbican
+#BARBICAN_BRANCH=stable/mitaka
+
+# Devstack install
+RECLONE=yes
+OFFLINE=False
