@@ -56,7 +56,7 @@ def create_root_secret():
     try:
         secret_id = secret_ref[-36:]
         uuid_pattern = re.compile(r'^[\da-f]{8}-([\da-f]{4}-){3}[\da-f]{12}$', re.IGNORECASE)
-        if not uuid_pattern.match(secret_id) and barbican.secret.get(name=ROOT_SECRET_NAME) is []:
+        if not uuid_pattern.match(secret_id) and barbican.secrets.get(name=ROOT_SECRET_NAME) is []:
             order = barbican.orders.create_key(name=ROOT_SECRET_NAME,
                                                algorithm=ROOT_SECRET_CIPHER,
                                                bit_length=ROOT_SECRET_LENGTH,
